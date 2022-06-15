@@ -1,6 +1,7 @@
 package com.curd.example.runner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,17 @@ public class CurdRepositoryRunner implements CommandLineRunner {
 		}*/
 		
 		// Batch Insertion
-		List<CoronaVaccine>vaccineToStore = new ArrayList<>();
+		/*List<CoronaVaccine>vaccineToStore = new ArrayList<>();
 		vaccineToStore.add(new CoronaVaccine(null,"Sputnik","RussianCompan","Russia",298.9,2));
 		vaccineToStore.add(new CoronaVaccine(null,"Pyzer","Pyzer","USA",560.9,2));
-		vaccineToStore.add(new CoronaVaccine(null,"moderena","moderena","USA",870.9,2));
+		vaccineToStore.add(new CoronaVaccine(null,"moderena","moderena","USA",870.9,2));*/
 		
-		List<CoronaVaccine>listVaccine = service.registerInBatch(vaccineToStore);
+//		List<CoronaVaccine>listVaccine = service.registerInBatch(vaccineToStore);
+		
+		// Using Arrays.asList(-) method
+		List<CoronaVaccine>listVaccine = service.registerInBatch(Arrays.asList(new CoronaVaccine(null,"Sputnik","RussianCompan","Russia",298.9,2),
+				new CoronaVaccine(null,"Pyzer","Pyzer","USA",560.9,2),
+				new CoronaVaccine(null,"moderena","moderena","USA",870.9,2)));
 		
 		System.out.println("The Regestration No are: ");
 		listVaccine.forEach(vaccine -> System.out.println(vaccine.getRegNo()));
