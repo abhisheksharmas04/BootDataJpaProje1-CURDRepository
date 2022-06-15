@@ -8,5 +8,6 @@ public interface ICoronaVaccineManagementService {
 	
 	public String registerVacine(CoronaVaccine vaccine);
 	public List<CoronaVaccine>registerInBatch(List<CoronaVaccine> vaccines);
+	public Long getVaccineCount();
 
 }

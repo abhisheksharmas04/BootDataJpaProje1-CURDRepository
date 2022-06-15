@@ -31,4 +31,9 @@ public class CoronaVaccineManagementServiceImpl implements ICoronaVaccineManagem
 			throw new IllegalArgumentException("Batch insertion not done");
 	}
 
+	@Override
+	public Long getVaccineCount() {
+		return coronaRepo.count();
+	}
+
 }

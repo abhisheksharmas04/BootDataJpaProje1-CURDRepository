@@ -40,12 +40,14 @@ public class CurdRepositoryRunner implements CommandLineRunner {
 //		List<CoronaVaccine>listVaccine = service.registerInBatch(vaccineToStore);
 		
 		// Using Arrays.asList(-) method
-		List<CoronaVaccine>listVaccine = service.registerInBatch(Arrays.asList(new CoronaVaccine(null,"Sputnik","RussianCompan","Russia",298.9,2),
+		/*List<CoronaVaccine>listVaccine = service.registerInBatch(Arrays.asList(new CoronaVaccine(null,"Sputnik","RussianCompan","Russia",298.9,2),
 				new CoronaVaccine(null,"Pyzer","Pyzer","USA",560.9,2),
 				new CoronaVaccine(null,"moderena","moderena","USA",870.9,2)));
 		
 		System.out.println("The Regestration No are: ");
-		listVaccine.forEach(vaccine -> System.out.println(vaccine.getRegNo()));
+		listVaccine.forEach(vaccine -> System.out.println(vaccine.getRegNo()));*/
+		
+		System.out.println("Record Count: " + service.getVaccineCount());
 	}
 	
 
