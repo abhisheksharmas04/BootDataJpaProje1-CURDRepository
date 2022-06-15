@@ -1,5 +1,7 @@
 package com.curd.example.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,14 @@ public class CoronaVaccineManagementServiceImpl implements ICoronaVaccineManagem
 		CoronaVaccine savedVaccine = coronaRepo.save(vaccine);
 		return savedVaccine !=null ?"Vaccine Registered/Updated Successfully with " + savedVaccine.getRegNo()
 			:"Vaccine Registration/Updated Failed.";
+	}
+
+	@Override
+	public List<CoronaVaccine> registerInBatch(List<CoronaVaccine> vaccines) {
+		if(vaccines != null)
+			return (List<CoronaVaccine>) coronaRepo.saveAll(vaccines);
+		else
+			throw new IllegalArgumentException("Batch insertion not done");
 	}
 
 }

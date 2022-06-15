@@ -1,5 +1,8 @@
 package com.curd.example.runner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.dao.DataAccessException;
@@ -16,7 +19,7 @@ public class CurdRepositoryRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		try {
+		/*try {
 			// create entity class object
 			CoronaVaccine vaccine = new CoronaVaccine(null, "Covisheld", "Serum", "India", 500.0, 2);
 			// call business method:
@@ -25,7 +28,19 @@ public class CurdRepositoryRunner implements CommandLineRunner {
 			dae.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}*/
+		
+		// Batch Insertion
+		List<CoronaVaccine>vaccineToStore = new ArrayList<>();
+		vaccineToStore.add(new CoronaVaccine(null,"Sputnik","RussianCompan","Russia",298.9,2));
+		vaccineToStore.add(new CoronaVaccine(null,"Pyzer","Pyzer","USA",560.9,2));
+		vaccineToStore.add(new CoronaVaccine(null,"moderena","moderena","USA",870.9,2));
+		
+		List<CoronaVaccine>listVaccine = service.registerInBatch(vaccineToStore);
+		
+		System.out.println("The Regestration No are: ");
+		listVaccine.forEach(vaccine -> System.out.println(vaccine.getRegNo()));
 	}
+	
 
 }
