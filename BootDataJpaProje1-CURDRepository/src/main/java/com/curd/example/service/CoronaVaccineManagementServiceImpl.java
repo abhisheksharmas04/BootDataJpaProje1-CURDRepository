@@ -1,6 +1,7 @@
 package com.curd.example.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,21 @@ public class CoronaVaccineManagementServiceImpl implements ICoronaVaccineManagem
 	@Override
 	public Long getVaccineCount() {
 		return coronaRepo.count();
+	}
+
+	@Override
+	public Iterable<CoronaVaccine> fetchAllDetails() {
+		return coronaRepo.findAll();
+	}
+
+	@Override
+	public Iterable<CoronaVaccine> fetchAllByIds(List<Long> ids) {
+		return coronaRepo.findAllById(ids);
+	}
+
+	@Override
+	public Optional<CoronaVaccine> fetchVaccineById(Long regNo) {
+		return coronaRepo.findById(regNo);
 	}
 
 }

@@ -3,6 +3,7 @@ package com.curd.example.runner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -48,6 +49,40 @@ public class CurdRepositoryRunner implements CommandLineRunner {
 		listVaccine.forEach(vaccine -> System.out.println(vaccine.getRegNo()));*/
 		
 		System.out.println("Record Count: " + service.getVaccineCount());
+		System.out.println("----------------------------------------------------------------------------");
+		
+		try {
+			Iterable<CoronaVaccine>itList = service.fetchAllDetails();
+			itList.forEach(vaccine -> {
+				System.out.println(vaccine);
+			});
+			System.out.println("----------------------------------------------------------------------------");
+			service.fetchAllDetails().forEach(vaccine -> System.out.println(vaccine));
+			
+			// using method reference:
+			System.out.println("----------------------------------------------------------------------------");
+			service.fetchAllDetails().forEach(System.out::println);
+			System.out.println("----------------------------------------------------------------------------");
+			Optional<CoronaVaccine>opt = service.fetchVaccineById(22L);
+			if(opt.isEmpty()) {
+				System.out.println(opt.get());
+			}else {
+				System.out.println("Record not found");
+				opt.orElseThrow(()-> new IllegalArgumentException("Record Not Found")); 
+			}
+			// THROW EXCPETION USING OPTIONAL
+			CoronaVaccine opt2 = service.fetchVaccineById(22L).
+					orElseThrow(()->new IllegalArgumentException("Record Not available"));
+			System.out.println(opt2);
+			
+			// or else
+			CoronaVaccine vaccine1 = service.fetchVaccineById(22L).orElse(new CoronaVaccine());
+			
+		} catch (DataAccessException dae) {
+			dae.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 
